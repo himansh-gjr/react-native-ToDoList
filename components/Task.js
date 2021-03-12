@@ -1,17 +1,15 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
-function Task({ item, onPress }) {
+function Task({ item }) {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.container}>
-        <View style={styles.square} />
-        <View style={styles.textContainer}>
-          <Text style={{ fontSize: 15 }}>{item.task}</Text>
-        </View>
-        <View style={styles.circle}></View>
+    <View style={styles.container}>
+      <View style={styles.square} />
+      <View style={styles.textContainer}>
+        <Text style={{ fontSize: 15 }}>{item.task}</Text>
       </View>
-    </TouchableWithoutFeedback>
+      <View style={styles.circle}></View>
+    </View>
   );
 }
 

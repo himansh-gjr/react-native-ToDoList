@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Task from "./components/Task";
+import { StyleSheet, Text, View } from "react-native";
+import Tasks from "./components/Tasks";
+import ToDoAction from "./components/ToDoAction";
 
 export default function App() {
   const [task, setTask] = useState("");
@@ -31,26 +23,14 @@ export default function App() {
         <Text style={styles.text}>Your Tasks</Text>
       </View>
       <View>
-        <FlatList
-          data={tasks}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <Task item={item} onPress={() => handleRemoveTodo(item)} />
-          )}
-        />
+        <Tasks tasks={tasks} handleRemoveTodo={handleRemoveTodo} />
       </View>
       <View style={styles.downContainer}>
-        <TextInput
-          onChangeText={(text) => setTask(text)}
-          value={task}
-          style={styles.textInput}
-          placeholder="type your task here"
+        <ToDoAction
+          task={task}
+          onChange={(text) => setTask(text)}
+          onPress={handleAddTodo}
         />
-        <TouchableOpacity onPress={handleAddTodo}>
-          <View style={styles.iconContainer}>
-            <MaterialCommunityIcons name="plus" size={24} color="#E8EAED" />
-          </View>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -61,14 +41,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: "#E8EAED",
     flex: 1,
-  },
-  iconContainer: {
-    backgroundColor: "#55BCF6",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
   },
   text: {
     fontSize: 30,
@@ -82,13 +54,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     backgroundColor: "grey",
-  },
-  textInput: {
-    backgroundColor: "#FFF",
-    borderRadius: 20,
-    width: "80%",
-    margin: 5,
-    height: 50,
-    padding: 10,
   },
 });
